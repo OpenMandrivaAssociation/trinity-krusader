@@ -41,6 +41,7 @@ BuildRequires:	autoconf automake libtool m4 make
 %{!?with_clang:BuildRequires:	gcc-c++}
 
 BuildRequires:	pkgconfig
+BuildRequires:  nas-devel
 BuildRequires:	fdupes
 
 BuildRequires:  pkgconfig(xrender)
