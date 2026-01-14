@@ -102,8 +102,7 @@ export PATH="%{tde_prefix}/bin:${PATH}"
   --enable-new-ldflags \
   --disable-final \
   --enable-closure \
-  --enable-rpath \
-  --disable-gcc-hidden-visibility
+  %{?with_clang:--disable-gcc-hidden-visibility}
 
 %__make %{?_smp_mflags}
 
