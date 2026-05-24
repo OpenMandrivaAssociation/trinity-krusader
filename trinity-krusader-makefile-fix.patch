@@ -1,0 +1,20 @@
+diff -up krusader-trinity-14.1.6/src/Makefile.am.omv krusader-trinity-14.1.6/src/Makefile.am
+--- krusader-trinity-14.1.6/src/Makefile.am.omv	2026-05-23 22:55:52.602466849 -0400
++++ krusader-trinity-14.1.6/src/Makefile.am	2026-05-23 22:56:25.641349095 -0400
+@@ -1,10 +1,10 @@
+ # the condition for this is found in configure.in.in
+-if with_tar
+-TARDIR = tar
+-endif
++#if with_tar
++#TARDIR = tar
++#endif
+ 
+-if with_iso
+-ISODIR = iso
+-endif
++#if with_iso
++#ISODIR = iso
++#endif
+ 
+ SUBDIRS = app krArc $(ISODIR) tdeconf_update virt $(TARDIR)

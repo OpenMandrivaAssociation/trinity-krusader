@@ -1,13 +1,8 @@
 %bcond clang 1
 
 # TDE variables
-%if "%{?tde_version}" == ""
-%define tde_version 14.1.5
-%endif
-
 %define tde_pkg krusader
 %define tde_prefix /opt/trinity
-
 
 %undefine __brp_remove_la_files
 %define dont_remove_libtool_files 1
@@ -17,8 +12,8 @@
 
 
 Name:		trinity-%{tde_pkg}
-Version:	1.90.0
-Release:	%{?tde_version:%{tde_version}_}3
+Version:	14.1.6
+Release:	1
 Summary:	Twin-panel (commander-style) file manager for TDE (and other desktops)
 Group:		Applications/Utilities
 URL:		http://www.trinitydesktop.org/
@@ -26,19 +21,19 @@ URL:		http://www.trinitydesktop.org/
 License:	GPLv2+
 
 
-Source0:		https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{tde_version}/main/applications/system/%{tarball_name}-%{tde_version}.tar.xz
+Source0:		https://mirror.ppa.trinitydesktop.org/trinity/releases/R%{version}/main/applications/system/%{tarball_name}-%{version}.tar.xz
 
-BuildRequires:	trinity-tdelibs-devel >= %{tde_version}
-BuildRequires:	trinity-tdebase-devel >= %{tde_version}
+BuildRequires:	trinity-tdelibs-devel >= %{version}
+BuildRequires:	trinity-tdebase-devel >= %{version}
+BuildRequires:	trinity-tdebindings-devel >= %{version}
+
 BuildRequires:	desktop-file-utils
-BuildRequires:	trinity-tdebindings-devel >= %{tde_version}
 
 BuildRequires:	autoconf automake libtool m4 make
 
 %{!?with_clang:BuildRequires:	gcc-c++}
 
 BuildRequires:	pkgconfig
-BuildRequires:  nas-devel
 BuildRequires:	fdupes
 
 BuildRequires:  pkgconfig(xrender)
@@ -72,12 +67,14 @@ It handles KIOSlaves such as smb:// or fish://.
 Almost completely customizable, Krusader is very user friendly, fast and looks
 great on your desktop.
 
+%patchlist
+trinity-krusader-makefile-fix.patch
 
 %prep
-%autosetup -n %{tarball_name}-%{tde_version}%{?preversion:~%{preversion}}
+%autosetup -p1 -n %{tarball_name}-%{version}
 
 %__cp "/usr/share/aclocal/libtool.m4" "admin/libtool.m4.in"
-%__cp -f "/usr/share/libtool/config/ltmain.sh" "admin/ltmain.sh" || %__cp -f "/usr/share/libtool/"*"/ltmain.sh" "admin/ltmain.sh" || %__cp -f "/usr/share/libtool/ltmain.sh" "admin/ltmain.sh"
+%__cp -f "/usr/share/libtool/config/ltmain.sh" "admin/ltmain.sh"
 %__make -f "admin/Makefile.common"
 
 
